@@ -1,11 +1,11 @@
 import requests
 import os
-from dotenv import load_dotenv
-import json
 import datetime
+import json
 import csv
-from time import sleep
 import pandas as pd
+from dotenv import load_dotenv
+from time import sleep
 
 load_dotenv()
 
@@ -127,7 +127,7 @@ def load_clients():
     Carrega dados transformados de clientes em um DataFrame e os salva em um arquivo .csv
     """
     list_clients = transform_clients()
-    df = pd.DataFrame(lista_cliente)
+    df = pd.DataFrame(list_clients)
 
     df.to_csv("parceiros.csv", index=False)
 
@@ -136,3 +136,4 @@ def load_clients():
 
 if __name__ == "__main__":
     print(load_clients())
+    
