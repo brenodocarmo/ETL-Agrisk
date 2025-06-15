@@ -99,15 +99,15 @@ def transform_clients():
     """
     Transforma dados de clientes extraídos em uma lista de dicionários com informações padronizadas
     """
-    dados = extract_clients()
+    data = extract_clients()
 
-    lista_cliente = []
+    list_clients = []
 
-    for cliente in dados:
-        id_parceiro = cliente.get("_id")
-        nome_parceiro = cliente.get("name")
-        cpf_cnpj = cliente.get("taxId", "N/A")
-        tipo_entidade = cliente.get("kind", "N/A")
+    for client in data:
+        id_parceiro = client.get("_id")
+        nome_parceiro = client.get("name")
+        cpf_cnpj = client.get("taxId", "N/A")
+        tipo_entidade = client.get("kind", "N/A")
         data_hora_extracao = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
         parceiro = {
@@ -117,21 +117,21 @@ def transform_clients():
             "tipo_entidade": tipo_entidade,
             "data_hora_extracao": data_hora_extracao,
         }
-        lista_cliente.append(parceiro)
+        list_clients.append(parceiro)
 
-    return lista_cliente
+    return list_clients
 
 
 def load_clients():
     """
     Carrega dados transformados de clientes em um DataFrame e os salva em um arquivo .csv
     """
-    lista_cliente = transform_clients()
-    df_parceiro = pd.DataFrame(lista_cliente)
+    list_clients = transform_clients()
+    df = pd.DataFrame(lista_cliente)
 
-    df_parceiro.to_csv("parceiros.csv", index=False)
+    df.to_csv("parceiros.csv", index=False)
 
-    return df_parceiro
+    return df
 
 
 if __name__ == "__main__":
